@@ -1,3 +1,7 @@
+#include <string>
+#include <map>
+#include <ctime>
+using namespace std;
 class DataObject {
 protected:
     string id;                          // 唯一标识符

@@ -1,3 +1,7 @@
+#pragma once
+#include<vector>
+#include<string>
+using namespace std;
 namespace RemoteSensingAlgorithms {
     // 植被指数
     double calculateNDVI(double red, double nir);

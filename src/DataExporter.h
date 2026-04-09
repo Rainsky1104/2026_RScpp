@@ -1,3 +1,7 @@
+#include <string>
+#include <vector>
+#include "DataObject.h"
+using namespace std;
 class DataExporter {
 private:
     string exportPath;

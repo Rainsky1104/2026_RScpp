@@ -1,3 +1,7 @@
+#include "DataObject.h"
+#include <vector>
+#include <string>
+#include <cmath>
 struct Point3D {
     double x, y, z;      // 三维坐标
     double intensity;    // 回波强度

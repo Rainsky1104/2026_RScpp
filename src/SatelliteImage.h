@@ -1,3 +1,9 @@
+#pragma once
+#include "DataObject.h"
+#include <vector>
+#include <string>
+#include <cmath>
+#include"Pixel.h"
 class SatelliteImage : public DataObject {
 private:
     int width;                          // 宽度（像素）
