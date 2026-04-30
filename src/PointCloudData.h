@@ -18,33 +18,33 @@ struct Point3D {
 
 class PointCloudData : public DataObject {
 private:
-    vector<Point3D> points;
+    std::vector<Point3D> points;
     double minX, maxX, minY, maxY, minZ, maxZ;  // 边界框
     
-    void updateBounds();
+    void updateBounds(double x,double y,double z);
     
 public:
-    PointCloudData(const string& id, const string& name, const string& path);
+    PointCloudData(const std::string& id, const std::string& name, const std::string& path);
     PointCloudData(const PointCloudData& other);
     ~PointCloudData();
     
     // 实现基类虚函数
     void display() const override;
     DataObject* clone() const override;
-    bool exportData(const string& format) const override;
-    string getType() const override { return "PointCloud"; }
-    
-    // 运算符重载
-    PointCloudData operator+(const PointCloudData& other) const;
-    PointCloudData& operator+=(const PointCloudData& other);
-    Point3D& operator[](int index);
-    const Point3D& operator[](int index) const;
+    bool exportData(const std::string& format) const override;
+    std::string getType() const override { return "PointCloud"; }
     
     // 点云操作
     void addPoint(const Point3D& point);
-    void addPoints(const vector<Point3D>& points);
+    void addPoints(const std::vector<Point3D>& points);
     int getPointCount() const;
-    
+
+    // 运算符重载
+    PointCloudData& operator+=(const PointCloudData& other);
+    PointCloudData operator+(const PointCloudData& other) const;
+    Point3D& operator[](int index);
+    const Point3D& operator[](int index) const;
+
     // 点云滤波
     PointCloudData voxelFilter(double voxelSize) const;
     PointCloudData statisticalOutlierRemoval(int k, double stdDev) const;
@@ -55,8 +55,12 @@ public:
     void printStatistics() const;
     
     // 获取器
-    const vector<Point3D>& getPoints() const { return points; }
+    const std::vector<Point3D>& getPoints() const { return points; }
     double getMinX() const { return minX; }
     double getMaxX() const { return maxX; }
-    // ... 其他边界获取器
+    double getMinY() const { return minY; }
+    double getMaxY() const { return maxY; }
+    double getMinZ() const { return minZ; }
+    double getMaxZ() const { return maxZ; } 
+ 
 };

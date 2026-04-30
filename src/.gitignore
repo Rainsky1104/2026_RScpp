@@ -6,7 +6,7 @@ bin/
 *.obj
 *.out
 
-# IDE 配置（每个人不同，不提交）
+# IDE 配置
 .vscode/
 *.code-workspace
 
