@@ -4,7 +4,8 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/src"
+                "${workspaceFolder}/src",
+                "C:/msys64/ucrt64/include/opencv4"
             ],
             "defines": [
                 "_DEBUG",

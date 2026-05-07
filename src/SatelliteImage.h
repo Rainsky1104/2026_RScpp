@@ -4,6 +4,9 @@
 #include <string>
 #include <cmath>
 #include"Pixel.h"
+#include <opencv2/core.hpp>
+#include <opencv2/opencv.hpp>
+
 class SatelliteImage : public DataObject {
 private:
     int width;                          // 宽度（像素）
@@ -18,6 +21,9 @@ private:
     // 私有辅助函数
     void calculateStatistics();          // 计算统计信息
     void validateCoordinates(int x, int y) const;  // 坐标验证
+    cv::Mat toCvMat() const;                        // data → cv::Mat
+    void fromCvMat(const cv::Mat& mat);             // cv::Mat → data
+    // 要引入opencv库但保留原数据储存模式，先在成员函数里转为opencv的Mat格式处理，再转回原格式储存
     
 public:
     // 构造函数

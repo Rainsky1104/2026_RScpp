@@ -1,0 +1,26 @@
+[
+{
+  "directory": "D:/Vscode_doc/2025302131011_LiuYizheng_RsProject/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/RS_app.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\RS_app.dir\\src\\DataObject.cpp.obj -c D:\\Vscode_doc\\2025302131011_LiuYizheng_RsProject\\src\\DataObject.cpp",
+  "file": "D:/Vscode_doc/2025302131011_LiuYizheng_RsProject/src/DataObject.cpp",
+  "output": "CMakeFiles/RS_app.dir/src/DataObject.cpp.obj"
+},
+{
+  "directory": "D:/Vscode_doc/2025302131011_LiuYizheng_RsProject/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/RS_app.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\RS_app.dir\\src\\SatelliteImage.cpp.obj -c D:\\Vscode_doc\\2025302131011_LiuYizheng_RsProject\\src\\SatelliteImage.cpp",
+  "file": "D:/Vscode_doc/2025302131011_LiuYizheng_RsProject/src/SatelliteImage.cpp",
+  "output": "CMakeFiles/RS_app.dir/src/SatelliteImage.cpp.obj"
+},
+{
+  "directory": "D:/Vscode_doc/2025302131011_LiuYizheng_RsProject/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/RS_app.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\RS_app.dir\\src\\PointCloudData.cpp.obj -c D:\\Vscode_doc\\2025302131011_LiuYizheng_RsProject\\src\\PointCloudData.cpp",
+  "file": "D:/Vscode_doc/2025302131011_LiuYizheng_RsProject/src/PointCloudData.cpp",
+  "output": "CMakeFiles/RS_app.dir/src/PointCloudData.cpp.obj"
+},
+{
+  "directory": "D:/Vscode_doc/2025302131011_LiuYizheng_RsProject/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/RS_app.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\RS_app.dir\\src\\main.cpp.obj -c D:\\Vscode_doc\\2025302131011_LiuYizheng_RsProject\\src\\main.cpp",
+  "file": "D:/Vscode_doc/2025302131011_LiuYizheng_RsProject/src/main.cpp",
+  "output": "CMakeFiles/RS_app.dir/src/main.cpp.obj"
+}
+]
