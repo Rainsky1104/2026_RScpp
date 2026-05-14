@@ -1,3 +1,9 @@
+#pragma once
+#include <iostream>
+#include <stdexcept>
+#include <cmath>
+#include <string>
+
 template<typename T>
 class Pixel {
 private:
@@ -96,9 +102,10 @@ public:
     
     // 类型转换运算符
     operator T() const { return getBrightness(); }  // 转换为亮度值
-    operator string() const{ 
-        return "Pixel(R:" + to_string(red) + ", G:" + to_string(green) + ", B:" + to_string(blue) +" N:" + to_string(nir) + ", T:" +  to_string(thermal) + "time" + to_string(timestamp) + ")";                         // 转换为字符串
-    };
+    operator std::string() const { 
+    return "Pixel(R:" + std::to_string(red) + ", G:" + std::to_string(green) + ", B:" + std::to_string(blue) +
+           " N:" + std::to_string(nir) + ", T:" + std::to_string(thermal) + " time:" + std::to_string(timestamp) + ")";
+}
 
     // 下标运算符（访问波段）
     T& operator[](int band){
@@ -124,13 +131,13 @@ public:
     }; // const版本的下标运算符，返回const引用以防止修改
     
     // 友元函数（流输入输出）
-    friend ostream& operator<<(ostream& os, const Pixel<T>& pixel) {
+    friend std::ostream& operator<<(std::ostream& os, const Pixel<T>& pixel) {
         os << "R:" << pixel.red << " G:" << pixel.green 
            << " B:" << pixel.blue << " NIR:" << pixel.nir
            << " Thermal:" << pixel.thermal;
         return os;
     }
-    
+
     // 遥感指数计算
     double getNDVI() const{
         return (getNir() - getRed()) / (getNir() + getRed() + 1e-7); // 加小常数避免除零

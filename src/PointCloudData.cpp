@@ -1,6 +1,7 @@
 #include"PointCloudData.h"
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <iomanip>
 #include <unordered_map>
 #include <cmath>
@@ -55,6 +56,44 @@ PointCloudData::PointCloudData(const PointCloudData& other)
 }
 
 PointCloudData::~PointCloudData(){} // vector会自动释放内存
+
+PointCloudData PointCloudData::loadFromPLY(const std::string& id, const std::string& name,
+                                           const std::string& filepath) {
+    std::ifstream file(filepath);
+    if (!file) throw std::runtime_error("Cannot open PLY file: " + filepath);
+
+    std::string line;
+    bool inHeader = true;
+    int vertexCount = 0;
+    std::vector<Point3D> points;
+
+    while (inHeader && std::getline(file, line)) {
+        if (line == "end_header") {
+            inHeader = false;
+            break;
+        }
+        if (line.find("element vertex") != std::string::npos) {
+            std::istringstream iss(line);
+            std::string token;
+            iss >> token >> token >> vertexCount;
+        }
+    }
+
+    if (vertexCount == 0)
+        throw std::runtime_error("PLY file: no vertex count found");
+
+    points.reserve(vertexCount);
+    for (int i = 0; i < vertexCount && std::getline(file, line); ++i) {
+        std::istringstream iss(line);
+        double x, y, z;
+        iss >> x >> y >> z;          // 只读取坐标，忽略后续颜色
+        points.emplace_back(x, y, z, 0.0, 0);
+    }
+
+    PointCloudData pcd(id, name, filepath);
+    pcd.addPoints(points);
+    return pcd;
+}
 
 void PointCloudData::display() const {
     std::cout << "PointCloudData: " << name << " (" << id << ")" << std::endl;

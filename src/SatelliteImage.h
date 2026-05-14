@@ -7,6 +7,8 @@
 #include <opencv2/core.hpp>
 #include <opencv2/opencv.hpp>
 
+
+
 class SatelliteImage : public DataObject {
 private:
     int width;                          // 宽度（像素）
@@ -26,6 +28,10 @@ private:
     // 要引入opencv库但保留原数据储存模式，先在成员函数里转为opencv的Mat格式处理，再转回原格式储存
     
 public:
+    // 读取JPG文件的静态工厂方法
+    static SatelliteImage loadFromJPG(const std::string& id, const std::string& name,
+                                  const std::string& filepath);
+
     // 构造函数
     SatelliteImage(const std::string& id, const std::string& name, const std::string& path,
                    int w, int h, int b, const std::string& sensor, double time = 0);

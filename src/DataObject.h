@@ -1,3 +1,4 @@
+#pragma once
 #include <string>
 #include <map>
 #include <ctime>
@@ -58,6 +59,10 @@ public:
     // 静态成员（所有对象共享）
     static int getTotalObjects();
     static void resetTotalObjects();
+
+    // 在 DataObject 类内部，与其他友元或运算符并列
+    template<typename T> friend bool exportToCSV(const DataObject& data, const std::string& filename);
+    template<typename T> friend bool exportToJSON(const DataObject& data, const std::string& filename); // DataExporter.h中定义的函数，允许访问DataObject的私有成员以实现导出功能
     
 protected:
     void updateSize(double newSize);

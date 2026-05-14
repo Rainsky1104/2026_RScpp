@@ -41,7 +41,12 @@ public:
     // 禁止拷贝（单例模式可选，保留声明但删除实现）
     DataManager(const DataManager&) = delete;
     DataManager& operator=(const DataManager&) = delete; //防止巨大数据被复制，鼓励用merge或移动语义来组合数据管理器
+    
     //=delete禁止编译器生成默认的拷贝构造函数和赋值运算符，防止误用
+    
+        // 启用移动语义
+    DataManager(DataManager&& other) noexcept = default;
+    DataManager& operator=(DataManager&& other) noexcept = default;
 
 
     void addData(const T& data) {
@@ -66,7 +71,7 @@ public:
                 return d;
         throw std::runtime_error("Data with ID " + id + " not found.");
     }
-    rebuildIndex();
+    
     bool contains(const std::string& id) const {
         for (const auto& d : dataList)
             if (d.getId() == id)
@@ -195,7 +200,7 @@ public:
     typename std::vector<T>::const_iterator begin() const { return dataList.begin(); }
     typename std::vector<T>::const_iterator end()   const { return dataList.end(); }
 
-     // 模板类实现，管理任意类型的数据对象，提供多个功能，支持迭代器和运算符重载，使用私有辅助函数维护索引和分类映射，确保数据管理的高效性和一致性
+     // 模板类实现，管理任意类型的数据对象，提供多个功能，支持迭代器和运算符重载，使用私有辅助函数维护索引和分类映射
 
     template<typename Func>
     void forEach(Func func) const {

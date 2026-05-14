@@ -1,3 +1,4 @@
+#pragma once
 #include "DataObject.h"
 #include <vector>
 #include <string>
@@ -27,6 +28,10 @@ public:
     PointCloudData(const std::string& id, const std::string& name, const std::string& path);
     PointCloudData(const PointCloudData& other);
     ~PointCloudData();
+    
+    // 读取ply文件数据（默认仅支持ASCII PLY）
+    static PointCloudData loadFromPLY(const std::string& id, const std::string& name,
+                                  const std::string& filepath);
     
     // 实现基类虚函数
     void display() const override;

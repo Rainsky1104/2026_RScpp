@@ -9,6 +9,7 @@
 #include<sstream>
 #include<opencv2/core.hpp>
 #include<opencv2/imgcodecs.hpp>
+#include<limits>
 
 void SatelliteImage::calculateStatistics() {
     bandStatistics.clear();
@@ -40,6 +41,36 @@ SatelliteImage::SatelliteImage(const std::string& id, const std::string& name, c
     calculateStatistics();
 }
 
+SatelliteImage SatelliteImage::loadFromJPG(const std::string& id, const std::string& name,
+                                           const std::string& filepath) {
+    cv::Mat img = cv::imread(filepath, cv::IMREAD_COLOR);
+    if (img.empty())
+        throw std::runtime_error("Cannot load JPG file: " + filepath);
+    
+    int h = img.rows;
+    int w = img.cols;
+    SatelliteImage result(id, name, filepath, w, h, 5, "JPG", 0.0);
+    
+    for (int r = 0; r < h; ++r) {
+        for (int c = 0; c < w; ++c) {
+            cv::Vec3b bgr = img.at<cv::Vec3b>(r, c);
+            double red   = bgr[2] / 255.0;
+            double green = bgr[1] / 255.0;
+            double blue  = bgr[0] / 255.0;
+
+            // 模拟近红外波段：与红、绿相关，且数值较高
+            double nir = (red + green) * 0.9 + 0.2;
+            if (nir > 1.0) nir = 1.0;   // 限制在 [0,1] 内
+
+            // 模拟的热红外波段辐射亮度
+            double thermal = 8.5;
+
+            result[r][c] = Pixel<double>(red, green, blue, nir, thermal, 0.0);
+        }
+    }
+    result.calculateStatistics();
+    return result;
+}
 
 SatelliteImage::SatelliteImage(const SatelliteImage& other)
     : DataObject(other), width(other.width), height(other.height), bands(other.bands),
@@ -209,10 +240,6 @@ const std::vector<Pixel<double>>& SatelliteImage::operator[](int row) const {
     return data[row];
 } // const版本返回const引用，不能修改数据
 
-
-SatelliteImage::operator double() const {
-    return cloudCover;
-} // 转换为云量百分比，直接返回成员变量cloudCover
 
 SatelliteImage::operator std::string() const {
     std::ostringstream oss;
